@@ -10,7 +10,7 @@ namespace DeeperNorth
     public class DeeperNorth : BaseUnityPlugin
     {
         private const string ModName = "DeeperNorth";
-        private const string ModVersion = "1.0.0";
+        private const string ModVersion = "1.0.1";
         private const string ModGUID = "xyz.919lab.mofongolero.DeeperNorth";
         Harmony harmony = new(ModGUID);
 
