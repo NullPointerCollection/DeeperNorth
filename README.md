@@ -19,4 +19,5 @@ Thank you JereKuusela for helping me get this code written!
 
 ## Contact
 Please report any issues here: https://github.com/toddlersizedsharkcage/DeeperNorth/issues
+
 I can be reached on Therzie's Discord (username Mofongolero) here: https://discord.gg/AEqkrq2z4u
