@@ -12,13 +12,13 @@ namespace DeeperNorth
     public class DeeperNorth : BaseUnityPlugin
     {
         internal const string ModName = "DeeperNorth";
-        internal const string ModVersion = "1.0.3";
+        internal const string ModVersion = "1.0.4";
         internal const string Author = "NullPointerCollection";
         internal const string ModGUID = "com.nullpointercollection.deepernorth";
 
         internal static ManualLogSource Log;
         internal Harmony harmony = new(ModGUID);
-        ServerSync.ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion, /*IsLocked = true,*/ ModRequired = true };
+        ServerSync.ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion, ModRequired = true };
 
         public void Awake()
         {
