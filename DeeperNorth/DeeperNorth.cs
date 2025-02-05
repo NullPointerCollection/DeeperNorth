@@ -1,4 +1,6 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
+using BepInEx.Logging;
 using HarmonyLib;
 using System;
 using System.Reflection;
@@ -9,13 +11,30 @@ namespace DeeperNorth
     [BepInPlugin(ModGUID, ModName, ModVersion)]
     public class DeeperNorth : BaseUnityPlugin
     {
-        private const string ModName = "DeeperNorth";
-        private const string ModVersion = "1.0.1";
-        private const string ModGUID = "xyz.919lab.mofongolero.DeeperNorth";
-        Harmony harmony = new(ModGUID);
+        internal const string ModName = "DeeperNorth";
+        internal const string ModVersion = "1.0.3";
+        internal const string Author = "NullPointerCollection";
+        internal const string ModGUID = "com.nullpointercollection.deepernorth";
+
+        internal static ManualLogSource Log;
+        internal Harmony harmony = new(ModGUID);
+        ServerSync.ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion, /*IsLocked = true,*/ ModRequired = true };
 
         public void Awake()
         {
+            Log = Logger;
+
+            if (Chainloader.PluginInfos.TryGetValue("Therzie.WarfareFireAndIce", out var therzieFireAndIce))
+            {
+                string activeVersion = therzieFireAndIce.Metadata.Version.ToString();
+                string maxVersion = "2.0.6";
+
+                if (activeVersion!= null && activeVersion.CompareTo(maxVersion) > 0)
+                {
+                    Log.LogWarning(Author + "." + ModName + ": Therzie WarfareFireAndIce 2.0.7 or greater detected, which contains DeeperNorth code embedded. Disabling DeeperNorth.");
+                    return;
+                }
+            }
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
