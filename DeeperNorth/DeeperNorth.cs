@@ -12,32 +12,31 @@ namespace DeeperNorth
     public class DeeperNorth : BaseUnityPlugin
     {
         internal const string ModName = "DeeperNorth";
-        internal const string ModVersion = "1.0.4";
+        internal const string ModVersion = "1.0.5";
         internal const string Author = "NullPointerCollection";
         internal const string ModGUID = "com.nullpointercollection.deepernorth";
-
-        internal static ManualLogSource Log;
+        public static readonly ManualLogSource DeeperNorthLogger = BepInEx.Logging.Logger.CreateLogSource(ModName);
         internal Harmony harmony = new(ModGUID);
         ServerSync.ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion, ModRequired = true };
 
         public void Awake()
         {
-            Log = Logger;
-
             if (Chainloader.PluginInfos.TryGetValue("Therzie.WarfareFireAndIce", out var therzieFireAndIce))
             {
                 string activeVersion = therzieFireAndIce.Metadata.Version.ToString();
                 string maxVersion = "2.0.6";
 
-                if (activeVersion!= null && activeVersion.CompareTo(maxVersion) > 0)
+                if (activeVersion != null && activeVersion.CompareTo(maxVersion) > 0)
                 {
-                    Log.LogWarning(Author + "." + ModName + ": Therzie WarfareFireAndIce 2.0.7 or greater detected, which contains DeeperNorth code embedded. Disabling DeeperNorth.");
+                    DeeperNorthLogger.LogWarning(ModName + ": Therzie WarfareFireAndIce 2.0.7 or greater detected, which contains DeeperNorth code embedded. Disabling DeeperNorth.");
                     return;
                 }
             }
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
+
+    
 
     [HarmonyPatch(typeof(HeightmapBuilder), nameof(HeightmapBuilder.Build))]
     public class HeightmapBuilderPatch
@@ -68,7 +67,7 @@ namespace DeeperNorth
         public static bool Disable = false;
         public static void Postfix(ref Heightmap.Biome __result, float wx, float wy)
         {
-            if (Disable) return;
+            if (Disable || !EWSFejdStartupPatch.IsBiomeEWSDeepNorth(wx, wy)) return;
             if (__result == Heightmap.Biome.Mountain && WorldGenerator.IsDeepnorth(wx, wy))
             {
                 __result = Heightmap.Biome.DeepNorth;
