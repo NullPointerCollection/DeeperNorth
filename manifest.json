@@ -1,6 +1,6 @@
 {
     "name": "DeeperNorth",
-    "version_number": "1.0.5",
+    "version_number": "1.0.6",
     "website_url": "https://github.com/NullPointerCollection/DeeperNorth",
     "description": "A lightweight mod to replace Mountain biomes in Deep North with more Deep North. This is only useful if you have mods that add locations, vegetation, mobs, etc. to Deep North.",
     "dependencies": [

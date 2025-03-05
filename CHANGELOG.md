@@ -1,3 +1,5 @@
+## v1.0.6
+- Updated ServerSync to fix playfab errors on servers that started on Valheim version 0.220.3.
 ## v1.0.5
 - Added compatibility for Expand World Size. Fixes issue where large EWS maps would have mountains far from world center replaced by Deep North despite being outside of the DN area.
 ## v1.0.4
