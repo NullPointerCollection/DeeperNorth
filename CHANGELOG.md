@@ -1,3 +1,5 @@
+## v1.0.7
+- Changed mod image and unfortunately the only way to do so is with a version increase in Thunderstore.
 ## v1.0.6
 - Updated ServerSync to fix playfab errors on servers that started on Valheim version 0.220.3.
 ## v1.0.5

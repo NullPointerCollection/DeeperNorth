@@ -12,7 +12,7 @@ namespace DeeperNorth
     public class DeeperNorth : BaseUnityPlugin
     {
         internal const string ModName = "DeeperNorth";
-        internal const string ModVersion = "1.0.6";
+        internal const string ModVersion = "1.0.7";
         internal const string Author = "NullPointerCollection";
         internal const string ModGUID = "com.nullpointercollection.deepernorth";
         public static readonly ManualLogSource DeeperNorthLogger = BepInEx.Logging.Logger.CreateLogSource(ModName);
